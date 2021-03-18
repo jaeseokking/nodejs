@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>노드 서버 </title>
+</head>
+<body>
+	<h2> 데이터 등록 화면 </h2>
+	<form method="post" enctype="multipart/form-data" id="insertform">
+		이름:<input type="text" name="itemname" /><br/>
+		가격:<input type="text" name="price" /><br/>
+		비고:<input type="text" name="description" /><br/>
+		이미지:<input type="file" name="pictureurl" accept="image/*" /><br/>
+		<input type="button" id="insertbtn" value="삽입"/>
+		<input type="button" id="mainbtn" value="메인" />
+	</form>
+</body>
+<script>
+	document.getElementById("mainbtn").addEventListener(
+		'click', function(e){
+			location.href="/";
+	})
+			
+	document.getElementById("insertbtn").addEventListener(
+		'click', function(e){
+		//유효성 검사 - 클라이언트 유효성 검사 수행
+			
+		//폼의 데이터를 생성
+		var formData = new FormData(
+			document.getElementById("insertform"));		
+		
+		//폼의 데이터를 전송
+		//item/insert 에 POST 방식으로 insertForm의 데이터를 전송 
+		const xhr = new XMLHttpRequest();
+		xhr.open('POST', 'insert');
+		xhr.send(formData)
+		
+		//결과 받기 
+		xhr.onreadystatechange = function(e){
+			//실패시 
+			if(xhr.readyState !== XMLHttpRequest.DONE){
+				return ;
+			}
+			if(xhr.status == 200){
+				alert(xhr.responseText);
+				var obj = JSON.parse(xhr.responseText);
+				if(obj.result == true){
+					location.href = 'all';
+				}else{
+					alert('삽입 실패');
+				}
+			}
+		}
+	})
+</script>
+</html>

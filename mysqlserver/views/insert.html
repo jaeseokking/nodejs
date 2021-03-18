@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>삽입</title>
+</head>
+<!-- multipart/form-data는파일을 받는 타입 -->
+<body>
+	<form method="post" enctype="multipart/form-data">
+		아이템 이름<input type="text" name="itemname"/><br/>
+		아이템 가격<input type="text" name="price"/><br/>
+		아이템 설명<input type="text" name="description"/><br/>
+		아이템 이미지<input type="file" name="pictureurl"/><br/>
+		<input type="submit" value="삽입"/>
+	</form>
+</body>
+</html>
